@@ -28,8 +28,8 @@
   "ui_blocks": [
     {
       "id": "sync",
-      "header": {"en": "Synchronize with glamox app"},
-      "text": {"en": "The app wil find and include all devices connected to your glamox user. You need to be logged in before synchronizing."},
+      "header": {"en": "Synchronize with Glamox app"},
+      "text": {"en": "The app wil find and include all devices connected to your Glamox user. You need to be logged in before synchronizing."},
       "configs": [],
       "buttons": ["sync"],
       "footer": {"en": ""},
@@ -38,10 +38,10 @@
     {
       "id": "poll_time_min",
       "header": {"en": "Poll Time"},
-      "text": {"en": "Set how often you want futurehome to get temperature reports from glamox in minutes."},
+      "text": {"en": "Set how often you want futurehome to get temperature reports from Glamox in minutes."},
       "configs": ["poll_time_min"],
       "buttons": [],
-      "footer": {"en": "Click save to save new poll time. After changing this value you need to stop and start the glamox app in playgrounds."},
+      "footer": {"en": "Click save to save new poll time. After changing this value you need to stop and start the Glamox app in playgrounds."},
       "hidden":false
     }
   ],
