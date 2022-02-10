@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/futurehomeno/edge-adax-adapter/model"
+	"github.com/futurehomeno/edge-glamox-adapter/model"
 	"github.com/futurehomeno/fimpgo"
 	log "github.com/sirupsen/logrus"
 )

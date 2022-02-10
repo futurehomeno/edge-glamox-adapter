@@ -1,7 +1,7 @@
 import os, sys
 import shutil
 
-SERVICE_NAME_TEMPLATE = "adax"
+SERVICE_NAME_TEMPLATE = "glamox"
 
 
 def replace_in_file(file_name,new_name,git_account):

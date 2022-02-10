@@ -74,7 +74,7 @@ func (ns *NetworkService) MakeInclusionReport(id string, name string) fimptype.T
 	thermostatService := fimptype.Service{
 		Name:    "thermostat",
 		Alias:   "thermostat",
-		Address: "/rt:dev/rn:adax/ad:1/sv:thermostat/ad:",
+		Address: "/rt:dev/rn:glamox/ad:1/sv:thermostat/ad:",
 		Enabled: true,
 		Groups:  []string{"ch_0"},
 		Props: map[string]interface{}{
@@ -87,7 +87,7 @@ func (ns *NetworkService) MakeInclusionReport(id string, name string) fimptype.T
 	tempSensorService := fimptype.Service{
 		Name:    "sensor_temp",
 		Alias:   "Temperature sensor",
-		Address: "/rt:dev/rn:adax/ad:1/sv:sensor_temp/ad:",
+		Address: "/rt:dev/rn:glamox/ad:1/sv:sensor_temp/ad:",
 		Enabled: true,
 		Groups:  []string{"ch_0"},
 		Props: map[string]interface{}{
@@ -101,7 +101,7 @@ func (ns *NetworkService) MakeInclusionReport(id string, name string) fimptype.T
 	meterElecService := fimptype.Service{
 		Name:    "meter_elec",
 		Alias:   "Meter Elec",
-		Address: "/rt:dev/rn:adax/ad:1/sv:meter_elec/ad:",
+		Address: "/rt:dev/rn:glamox/ad:1/sv:meter_elec/ad:",
 		Enabled: true,
 		Groups:  []string{"ch_0"},
 		Props: map[string]interface{}{
@@ -112,7 +112,7 @@ func (ns *NetworkService) MakeInclusionReport(id string, name string) fimptype.T
 		Interfaces:       meterElecInterfaces,
 	}
 
-	manufacturer = "adax"
+	manufacturer = "glamox"
 	serviceAddress := id
 	thermostatService.Address = thermostatService.Address + serviceAddress
 	tempSensorService.Address = tempSensorService.Address + serviceAddress

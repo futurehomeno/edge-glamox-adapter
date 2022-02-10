@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/futurehomeno/edge-adax-adapter/adax-api"
-	"github.com/futurehomeno/edge-adax-adapter/model"
-	"github.com/futurehomeno/edge-adax-adapter/router"
+	"github.com/futurehomeno/edge-glamox-adapter/glamox-api"
+	"github.com/futurehomeno/edge-glamox-adapter/model"
+	"github.com/futurehomeno/edge-glamox-adapter/router"
 	"github.com/futurehomeno/fimpgo"
 	"github.com/futurehomeno/fimpgo/discovery"
 	"github.com/futurehomeno/fimpgo/edgeapp"
@@ -35,11 +35,11 @@ func main() {
 		log.Fatal(errors.Wrap(err, "can't load config file."))
 	}
 
-	client := adax.NewClient(configs.AccessToken, configs.RefreshToken)
+	client := glamox.NewClient(configs.AccessToken, configs.RefreshToken)
 	// client.UpdateAuthParameters(configs.MqttServerURI)
 
 	edgeapp.SetupLog(configs.LogFile, configs.LogLevel, configs.LogFormat)
-	log.Info("--------------Starting adax----------------")
+	log.Info("--------------Starting glamox----------------")
 	log.Info("Work directory : ", configs.WorkDir)
 	appLifecycle.PublishEvent(model.EventConfiguring, "main", nil)
 
@@ -91,9 +91,9 @@ func main() {
 	}
 }
 
-func LoadStates(configs *model.Configs, client *adax.Client, states *model.States, err error, mqtt *fimpgo.MqttTransport) *model.States {
-	hr := adax.HomesAndRooms{}
-	s := adax.State{}
+func LoadStates(configs *model.Configs, client *glamox.Client, states *model.States, err error, mqtt *fimpgo.MqttTransport) *model.States {
+	hr := glamox.HomesAndRooms{}
+	s := glamox.State{}
 	lastStates := states.States
 
 	states.HomesAndRooms = nil
@@ -212,7 +212,7 @@ func LoadStates(configs *model.Configs, client *adax.Client, states *model.State
 	return states
 }
 
-func RefreshTokens(configs *model.Configs, client *adax.Client, err error) {
+func RefreshTokens(configs *model.Configs, client *glamox.Client, err error) {
 	log.Error("Deleting token and trying to get new")
 	configs.AccessToken = ""
 	configs.RefreshToken = ""

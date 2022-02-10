@@ -96,6 +96,6 @@ linters-settings:
   lll:
     line-length: 160
   gci:
-    local-prefixes: github.com/futurehomeno/adax
+    local-prefixes: github.com/futurehomeno/glamox
   goimports:
-    local-prefixes: github.com/futurehomeno/adax
+    local-prefixes: github.com/futurehomeno/glamox

@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/futurehomeno/edge-adax-adapter/adax-api"
-	"github.com/futurehomeno/edge-adax-adapter/utils"
+	"github.com/futurehomeno/edge-glamox-adapter/glamox-api"
+	"github.com/futurehomeno/edge-glamox-adapter/utils"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -18,8 +18,8 @@ type States struct {
 	ConfiguredAt string `json:"configuret_at"`
 	ConfiguredBy string `json:"configures_by"`
 
-	HomesAndRooms *adax.HomesAndRooms `json:"homesAndRooms"`
-	States        *adax.State         `json:"states"`
+	HomesAndRooms *glamox.HomesAndRooms `json:"homesAndRooms"`
+	States        *glamox.State         `json:"states"`
 }
 
 func NewStates(workDir string) *States {
