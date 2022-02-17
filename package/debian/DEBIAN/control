@@ -1,7 +1,7 @@
-Package: adax
-Version: 0.0.1-1-g69a658a
+Package: glamox
+Version: 1.0.0
 Section: non-free/misc
 Priority: optional
 Architecture: armhf
 Maintainer: Markus Haldorsen <markus@futurehome.no>
-Description: Control and monitor Adax WiFi heaters from Futurehome.
+Description: Control and monitor glamox WiFi heaters from Futurehome.

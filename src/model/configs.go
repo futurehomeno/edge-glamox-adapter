@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/futurehomeno/edge-adax-adapter/utils"
+	"github.com/futurehomeno/edge-glamox-adapter/utils"
 	log "github.com/sirupsen/logrus"
 )
 
-const ServiceName = "adax"
+const ServiceName = "glamox"
 
 type Configs struct {
 	path               string

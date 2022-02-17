@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/futurehomeno/edge-adax-adapter/adax-api"
-	"github.com/futurehomeno/edge-adax-adapter/model"
+	"github.com/futurehomeno/edge-glamox-adapter/glamox-api"
+	"github.com/futurehomeno/edge-glamox-adapter/model"
 	"github.com/futurehomeno/fimpgo"
 	"github.com/futurehomeno/fimpgo/utils"
 	log "github.com/sirupsen/logrus"
@@ -19,12 +19,12 @@ type FromFimpRouter struct {
 	appLifecycle *model.Lifecycle
 	configs      *model.Configs
 	states       *model.States
-	client       *adax.Client
+	client       *glamox.Client
 	env          string
 }
 
 // NewFromFimpRouter ...
-func NewFromFimpRouter(mqt *fimpgo.MqttTransport, appLifecycle *model.Lifecycle, configs *model.Configs, states *model.States, client *adax.Client) *FromFimpRouter {
+func NewFromFimpRouter(mqt *fimpgo.MqttTransport, appLifecycle *model.Lifecycle, configs *model.Configs, states *model.States, client *glamox.Client) *FromFimpRouter {
 	fc := FromFimpRouter{inboundMsgCh: make(fimpgo.MessageCh, 5), mqt: mqt, appLifecycle: appLifecycle, configs: configs, states: states, client: client}
 	fc.mqt.RegisterChannel("ch1", fc.inboundMsgCh)
 	hubInfo, err := utils.NewHubUtils().GetHubInfo()
@@ -57,8 +57,8 @@ func (fc *FromFimpRouter) Start() {
 }
 
 func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
-	hr := adax.HomesAndRooms{}
-	state := adax.State{}
+	hr := glamox.HomesAndRooms{}
+	state := glamox.State{}
 	ns := model.NetworkService{}
 
 	log.Debug("New fimp msg . cmd = ", newMsg.Payload.Type)
@@ -164,8 +164,8 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 							// fc.configs.DeviceCollection = append(fc.configs.DeviceCollection, device)
 							inclReport := ns.MakeInclusionReport(strconv.Itoa(device.ID), device.Name)
 
-							msg := fimpgo.NewMessage("evt.thing.inclusion_report", "adax", fimpgo.VTypeObject, inclReport, nil, nil, nil)
-							adr := fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "adax", ResourceAddress: "1"}
+							msg := fimpgo.NewMessage("evt.thing.inclusion_report", "glamox", fimpgo.VTypeObject, inclReport, nil, nil, nil)
+							adr := fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "glamox", ResourceAddress: "1"}
 							if err := fc.mqt.Publish(&adr, msg); err != nil {
 								log.Error(err)
 							}
@@ -193,8 +193,8 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 						exclVal := map[string]interface{}{
 							"address": strconv.Itoa(device.ID),
 						}
-						adr := &fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "adax", ResourceAddress: "1"}
-						msg := fimpgo.NewMessage("evt.thing.exclusion_report", "adax", fimpgo.VTypeObject, exclVal, nil, nil, newMsg.Payload)
+						adr := &fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "glamox", ResourceAddress: "1"}
+						msg := fimpgo.NewMessage("evt.thing.exclusion_report", "glamox", fimpgo.VTypeObject, exclVal, nil, nil, newMsg.Payload)
 						if err := fc.mqt.Publish(adr, msg); err != nil {
 							log.Error(err)
 						}
@@ -304,8 +304,8 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 							// fc.configs.DeviceCollection = append(fc.configs.DeviceCollection, device)
 							inclReport := ns.MakeInclusionReport(strconv.Itoa(device.ID), device.Name)
 
-							msg := fimpgo.NewMessage("evt.thing.inclusion_report", "adax", fimpgo.VTypeObject, inclReport, nil, nil, nil)
-							adr := fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "adax", ResourceAddress: "1"}
+							msg := fimpgo.NewMessage("evt.thing.inclusion_report", "glamox", fimpgo.VTypeObject, inclReport, nil, nil, nil)
+							adr := fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "glamox", ResourceAddress: "1"}
 							if err := fc.mqt.Publish(&adr, msg); err != nil {
 								log.Error(err)
 							}
@@ -436,8 +436,8 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 						if strconv.Itoa(device.ID) == address {
 							inclReport := ns.MakeInclusionReport(strconv.Itoa(device.ID), device.Name)
 
-							msg := fimpgo.NewMessage("evt.thing.inclusion_report", "adax", fimpgo.VTypeObject, inclReport, nil, nil, nil)
-							adr := fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "adax", ResourceAddress: "1"}
+							msg := fimpgo.NewMessage("evt.thing.inclusion_report", "glamox", fimpgo.VTypeObject, inclReport, nil, nil, nil)
+							adr := fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "glamox", ResourceAddress: "1"}
 							if err := fc.mqt.Publish(&adr, msg); err != nil {
 								log.Error(err)
 							}
@@ -462,8 +462,8 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 				val := map[string]interface{}{
 					"address": deviceID,
 				}
-				adr := &fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "adax", ResourceAddress: "1"}
-				msg := fimpgo.NewMessage("evt.thing.exclusion_report", "adax", fimpgo.VTypeObject, val, nil, nil, newMsg.Payload)
+				adr := &fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "glamox", ResourceAddress: "1"}
+				msg := fimpgo.NewMessage("evt.thing.exclusion_report", "glamox", fimpgo.VTypeObject, val, nil, nil, newMsg.Payload)
 				if err := fc.mqt.Publish(adr, msg); err != nil {
 					log.Error(err)
 				}
@@ -480,8 +480,8 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 						exclVal := map[string]interface{}{
 							"address": strconv.Itoa(device.ID),
 						}
-						adr := &fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "adax", ResourceAddress: "1"}
-						msg := fimpgo.NewMessage("evt.thing.exclusion_report", "adax", fimpgo.VTypeObject, exclVal, nil, nil, newMsg.Payload)
+						adr := &fimpgo.Address{MsgType: fimpgo.MsgTypeEvt, ResourceType: fimpgo.ResourceTypeAdapter, ResourceName: "glamox", ResourceAddress: "1"}
+						msg := fimpgo.NewMessage("evt.thing.exclusion_report", "glamox", fimpgo.VTypeObject, exclVal, nil, nil, newMsg.Payload)
 						if err := fc.mqt.Publish(adr, msg); err != nil {
 							log.Error(err)
 						}
@@ -492,12 +492,12 @@ func (fc *FromFimpRouter) routeFimpMessage(newMsg *fimpgo.Message) {
 	}
 }
 
-func (fc *FromFimpRouter) findHomeRoomAndDeviceFromDeviceID(deviceID string) (adax.Home, adax.Room, adax.Device, error) {
+func (fc *FromFimpRouter) findHomeRoomAndDeviceFromDeviceID(deviceID string) (glamox.Home, glamox.Room, glamox.Device, error) {
 	deviceIDInt, err := strconv.Atoi(deviceID)
 	if err != nil {
 		log.Error("Can't convert addr/deviceID to int. addr ", deviceIDInt, ", error: ", err)
 
-		return adax.Home{}, adax.Room{}, adax.Device{}, err
+		return glamox.Home{}, glamox.Room{}, glamox.Device{}, err
 	}
 
 	for _, home := range fc.states.States.Users[0].Homes {
@@ -509,5 +509,5 @@ func (fc *FromFimpRouter) findHomeRoomAndDeviceFromDeviceID(deviceID string) (ad
 			}
 		}
 	}
-	return adax.Home{}, adax.Room{}, adax.Device{}, errors.New("could not find home, room or device containing device with matching ID")
+	return glamox.Home{}, glamox.Room{}, glamox.Device{}, errors.New("could not find home, room or device containing device with matching ID")
 }

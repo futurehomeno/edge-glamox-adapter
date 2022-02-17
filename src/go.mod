@@ -1,4 +1,4 @@
-module github.com/futurehomeno/edge-adax-adapter
+module github.com/futurehomeno/edge-glamox-adapter
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect

@@ -2,8 +2,8 @@
 set -e
 
 if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
-  deb-systemd-invoke stop adax.service >/dev/null
-  systemctl disable adax.service || true
-  rm -r /var/log/thingsplex/adax/ || true
-  rm -r /opt/thingsplex/adax/data/ || true
+  deb-systemd-invoke stop glamox.service >/dev/null
+  systemctl disable glamox.service || true
+  rm -r /var/log/thingsplex/glamox/ || true
+  rm -r /opt/thingsplex/glamox/data/ || true
 fi
